@@ -155,8 +155,11 @@ let
     src = fetchFromGitHub {
       owner = "fish-shell";
       repo = "fish-shell";
-      tag = finalAttrs.version;
-      hash = "sha256-O5xZHXNrJMpjTA2mrTqzMtU/55UArwoc2adc0R6pVl0=";
+      # TODO: uncomment and remove rev once the stable version is released
+      #tag = finalAttrs.version;
+      # Last commit on the Integration_4.0.0 branch
+      rev = "4024d824125b98dc7054126156c4a7135f1ec331";
+      hash = "sha256-wVrrHxPDgOdritHaMT9dWToI3J0EZA0Qt5nME2XkFP0=";
     };
 
     env = {
@@ -167,7 +170,7 @@ let
 
     cargoDeps = rustPlatform.fetchCargoVendor {
       inherit (finalAttrs) src;
-      hash = "sha256-jTVZKzX/Uy2RtyMbeQmatLLrOO+5S5jXrYKMGXNMcV4=";
+      hash = "sha256-j1HCj1iZ5ZV8nfMmJq5ggPD4s+5V8IretDdoz+G3wWU=";
     };
 
     patches = [
@@ -287,6 +290,7 @@ let
     preConfigure =
       ''
         patchShebangs ./build_tools/git_version_gen.sh
+        patchShebangs ./tests/test_driver.py
       ''
       + lib.optionalString (stdenv.hostPlatform != stdenv.buildPlatform) ''
         export CMAKE_PREFIX_PATH=

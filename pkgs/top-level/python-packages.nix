@@ -11406,6 +11406,8 @@ self: super: with self; {
 
   pyasuswrt = callPackage ../development/python-modules/pyasuswrt { };
 
+  pyasynchat = callPackage ../development/python-modules/pyasynchat { };
+
   pyasyncore = callPackage ../development/python-modules/pyasyncore { };
 
   pyathena = callPackage ../development/python-modules/pyathena { };

@@ -83,7 +83,9 @@ buildPythonPackage rec {
   pythonImportsCheck = [ "autobahn" ];
 
   optional-dependencies = lib.fix (self: {
-    all = with self; accelerate ++ compress ++ encryption ++ nvx ++ serialization ++ scram ++ twisted ++ ui;
+    all =
+      with self;
+      accelerate ++ compress ++ encryption ++ nvx ++ serialization ++ scram ++ twisted ++ ui;
     accelerate = [
       # wsaccel
     ];

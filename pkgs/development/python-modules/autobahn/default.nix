@@ -2,6 +2,7 @@
   lib,
   buildPythonPackage,
   fetchFromGitHub,
+  fetchpatch2,
   attrs,
   argon2-cffi,
   cbor2,
@@ -23,7 +24,6 @@
   pythonOlder,
   service-identity,
   setuptools,
-  twisted,
   txaio,
   ujson,
   zope-interface,
@@ -42,6 +42,14 @@ buildPythonPackage rec {
     tag = "v${version}";
     hash = "sha256-aeTE4a37zr83KZ+v947XikzFrHAhkZ4mj4tXdkQnB84=";
   };
+
+  patches = [
+    (fetchpatch2 {
+      # removal of broken pytest-asyncio markers
+      url = "https://github.com/crossbario/autobahn-python/commit/7bc85b34e200640ab98a41cfddb38267f39bc92e.patch";
+      hash = "sha256-JbuYWQhvjlXuHde8Z3ZSJAyrMOdIcE1GOq+Eh2HTz8c=";
+    })
+  ];
 
   build-system = [ setuptools ];
 

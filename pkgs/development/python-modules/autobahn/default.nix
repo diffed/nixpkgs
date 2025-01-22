@@ -24,10 +24,11 @@
   pythonOlder,
   service-identity,
   setuptools,
+  twisted,
   txaio,
   ujson,
   zope-interface,
-}@args:
+}:
 
 buildPythonPackage rec {
   pname = "autobahn";
@@ -81,8 +82,8 @@ buildPythonPackage rec {
 
   pythonImportsCheck = [ "autobahn" ];
 
-  optional-dependencies = rec {
-    all = accelerate ++ compress ++ encryption ++ nvx ++ serialization ++ scram ++ twisted ++ ui;
+  optional-dependencies = lib.fix (self: {
+    all = with self; accelerate ++ compress ++ encryption ++ nvx ++ serialization ++ scram ++ twisted ++ ui;
     accelerate = [
       # wsaccel
     ];
@@ -108,11 +109,11 @@ buildPythonPackage rec {
     ];
     twisted = [
       attrs
-      args.twisted
+      twisted
       zope-interface
     ];
     ui = [ pygobject3 ];
-  };
+  });
 
   meta = with lib; {
     changelog = "https://github.com/crossbario/autobahn-python/blob/${src.rev}/docs/changelog.rst";

@@ -13,7 +13,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "prisma";
-  version = "6.6.0";
+  version = "6.7.0";
 
   src = fetchFromGitHub {
     owner = "prisma";
